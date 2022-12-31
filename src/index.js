@@ -1,12 +1,9 @@
-import _ from 'lodash';
-
-function component() {
-  const element = document.createElement('div');
-
-  // lodash（目前通过一个 script 引入）对于执行这一行是必需的
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
+import { a } from './a.js'
+const b = import('./b.js') // 动态引入，也按需加载
+const hi = () => {
+  console.log('hi')
+  console.log(a);
+  console.log(b)
 }
 
-document.body.appendChild(component());
+hi()
