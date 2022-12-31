@@ -11,7 +11,7 @@ module.exports = {
   plugins: [new ESLintPlugin()],
   module: {
     rules: [{
-      test: /\.jsx?$/,
+      test: /\.[jt]sx?$/,
       exclude: /(node_modules|bower_components)/,
       use: {
         loader: 'babel-loader',
@@ -20,7 +20,8 @@ module.exports = {
             ['@babel/preset-env'],
             ['@babel/preset-react', {
               runtime: 'classic'
-            }]
+            }],
+            ['@babel/preset-typescript']
           ]
         }
       }
