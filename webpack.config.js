@@ -1,12 +1,14 @@
-const path = require('path');
+const path = require('path')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
   mode: 'production',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
+  plugins: [new ESLintPlugin()],
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -16,10 +18,12 @@ module.exports = {
         options: {
           presets: [
             ['@babel/preset-env'],
-            ["@babel/preset-react"]
+            ['@babel/preset-react', {
+              runtime: 'classic'
+            }]
           ]
         }
       }
     }]
   }
-};
+}
