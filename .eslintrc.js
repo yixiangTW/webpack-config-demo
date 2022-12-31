@@ -7,7 +7,13 @@ module.exports = {
     'plugin:react/recommended',
     'standard-with-typescript'
   ],
-  overrides: [
+  overrides: [{
+    files: ['*.ts', '*.tsx'],
+    parserOptions: {
+      project: './tsconfig.json'
+    },
+    extends: ['airbnb-typescript']
+  }
   ],
   parserOptions: {
     ecmaVersion: 'latest',

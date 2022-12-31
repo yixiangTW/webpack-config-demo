@@ -1,3 +1,2 @@
-const x: string = 'typescript'
-
-export { x }
+const x: string = 'typescript';
+export { x };

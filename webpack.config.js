@@ -8,7 +8,9 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
-  plugins: [new ESLintPlugin()],
+  plugins: [new ESLintPlugin({
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  })],
   module: {
     rules: [{
       test: /\.[jt]sx?$/,
