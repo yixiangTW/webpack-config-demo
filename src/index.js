@@ -1,4 +1,4 @@
-import { a } from '@/a.js'
+import { a } from 'src/a.js'
 import { TsxDemo } from './tsx-demo.tsx'
 import { JsxDemo } from './jsx-demo.jsx'
 import { x } from './ts-demo.ts'

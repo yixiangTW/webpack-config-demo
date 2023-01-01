@@ -9,8 +9,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, './src')
+      src: path.resolve(__dirname, './src')
     }
   },
   plugins: [new ESLintPlugin({
@@ -19,7 +20,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.[jt]sx?$/,
-      exclude: /(node_modules|bower_components)/,
+      exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
         options: {
