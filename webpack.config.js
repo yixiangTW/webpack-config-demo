@@ -41,7 +41,12 @@ module.exports = {
         // 将 CSS 转化成 CommonJS 模块
         'css-loader',
         // 将 Sass 编译成 CSS
-        'sass-loader'
+        {
+          loader: 'sass-loader',
+          options: {
+            additionalData: '@import "src/scss-vars.scss";'
+          }
+        }
       ]
     }]
   }
