@@ -33,7 +33,17 @@ module.exports = {
     }
   },
   optimization: {
-    runtimeChunk: 'single'
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        defaultVendors: {
+          minSize: 0,
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors', // 文件名
+          chunks: 'all' // all同步加载的和异步加载的 async表示异步加载的 initial表示同步加载的文件
+        }
+      }
+    }
   },
   plugins: [new HtmlWebpackPlugin(), mode === 'production' && new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
