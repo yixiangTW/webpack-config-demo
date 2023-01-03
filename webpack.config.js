@@ -19,7 +19,10 @@ const cssLoaders = (...loaders) => [
 ]
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js',
+    admin: './src/admin.js'
+  },
   mode,
   output: {
     filename: '[name].[contenthash].js',
@@ -37,15 +40,26 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
+          priority: 3,
           minSize: 0,
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors', // 文件名
           chunks: 'all' // all同步加载的和异步加载的 async表示异步加载的 initial表示同步加载的文件
+        },
+        commons: {
+          priority: 1,
+          minSize: 0, // 不管文件有多小，我都要优化
+          minChunks: 2,
+          chunks: 'all',
+          name: 'common'
         }
       }
     }
   },
-  plugins: [new HtmlWebpackPlugin(), mode === 'production' && new MiniCssExtractPlugin({
+  plugins: [new HtmlWebpackPlugin(),new HtmlWebpackPlugin({
+    filename: 'admin.html',
+    chunks: ['admin']
+  }), mode === 'production' && new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
   }), new ESLintPlugin({
     extensions: ['.js', '.jsx', '.ts', '.tsx']

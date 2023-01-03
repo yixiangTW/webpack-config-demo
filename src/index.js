@@ -7,7 +7,9 @@ import 'src/scss-demo.scss'
 import 'src/less-demo.less'
 import 'src/stylus-demo.styl'
 import vars from 'src/scss-export.scss'
+import { shared } from 'src/shared'
 const b = import('./b.js') // 动态引入，也按需加载
+console.log(shared)
 console.log(React)
 console.log(x)
 console.log(vars)
