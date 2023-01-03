@@ -1,9 +1,11 @@
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const cssLoaders = (...loaders) => [
   // 将 JS 字符串生成为 style 节点
-  'style-loader',
+  // 'style-loader',
+  MiniCssExtractPlugin.loader,
   // 将 CSS 转化成 CommonJS 模块
   {
     loader: 'css-loader',
@@ -20,7 +22,7 @@ module.exports = {
   entry: './src/index.js',
   mode: 'production',
   output: {
-    filename: 'main.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
@@ -29,7 +31,9 @@ module.exports = {
       src: path.resolve(__dirname, './src')
     }
   },
-  plugins: [new ESLintPlugin({
+  plugins: [new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css'
+  }), new ESLintPlugin({
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   })],
   module: {
