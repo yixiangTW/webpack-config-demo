@@ -75,6 +75,27 @@ module.exports = {
           }
         }
       ]
+    }, {
+      test: /\.styl$/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              mode: 'icss'
+            }
+          }
+        },
+        {
+          loader: 'stylus-loader', // 将 Stylus 文件编译为 CSS
+          options: {
+            stylusOptions: {
+              import: [path.join(__dirname, 'src/stylus-vars.styl')]
+            }
+          }
+        }
+      ]
     }]
   }
 }

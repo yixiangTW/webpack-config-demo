@@ -4,6 +4,7 @@ import { JsxDemo } from './jsx-demo.jsx'
 import { x } from './ts-demo.ts'
 import 'src/scss-demo.scss'
 import 'src/less-demo.less'
+import 'src/stylus-demo.styl'
 import vars from 'src/scss-export.scss'
 const b = import('./b.js') // 动态引入，也按需加载
 console.log(x)
