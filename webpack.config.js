@@ -23,13 +23,17 @@ module.exports = {
   mode,
   output: {
     filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx'],
     alias: {
       src: path.resolve(__dirname, './src')
     }
+  },
+  optimization: {
+    runtimeChunk: 'single'
   },
   plugins: [new HtmlWebpackPlugin(), mode === 'production' && new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
