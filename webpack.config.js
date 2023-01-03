@@ -55,6 +55,21 @@ module.exports = {
           }
         }
       ]
+    }, {
+      test: /\.less$/i,
+      use: [
+        // compiles Less to CSS
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              mode: 'icss'
+            }
+          }
+        },
+        'less-loader'
+      ]
     }]
   }
 }
