@@ -1,6 +1,21 @@
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
 
+const cssLoaders = (...loaders) => [
+  // 将 JS 字符串生成为 style 节点
+  'style-loader',
+  // 将 CSS 转化成 CommonJS 模块
+  {
+    loader: 'css-loader',
+    options: {
+      modules: {
+        mode: 'icss'
+      }
+    }
+  },
+  ...loaders
+]
+
 module.exports = {
   entry: './src/index.js',
   mode: 'production',
@@ -35,67 +50,30 @@ module.exports = {
       }
     }, {
       test: /\.s[ac]ss$/i,
-      use: [
-        // 将 JS 字符串生成为 style 节点
-        'style-loader',
-        // 将 CSS 转化成 CommonJS 模块
-        {
-          loader: 'css-loader',
-          options: {
-            modules: {
-              mode: 'icss'
-            }
-          }
-        },
-        // 将 Sass 编译成 CSS
-        {
-          loader: 'sass-loader',
-          options: {
-            additionalData: '@import "src/scss-vars.scss";'
-          }
+      use: cssLoaders({
+        loader: 'sass-loader',
+        options: {
+          additionalData: '@import "src/scss-vars.scss";'
         }
-      ]
+      })
     }, {
       test: /\.less$/i,
-      use: [
-        // compiles Less to CSS
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            modules: {
-              mode: 'icss'
-            }
-          }
-        },
-        {
-          loader: 'less-loader',
-          options: {
-            additionalData: '@import "~src/less-vars.less";'
-          }
+      use: cssLoaders({
+        loader: 'less-loader',
+        options: {
+          additionalData: '@import "~src/less-vars.less";'
         }
-      ]
+      })
     }, {
       test: /\.styl$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            modules: {
-              mode: 'icss'
-            }
-          }
-        },
-        {
-          loader: 'stylus-loader', // 将 Stylus 文件编译为 CSS
-          options: {
-            stylusOptions: {
-              import: [path.join(__dirname, 'src/stylus-vars.styl')]
-            }
+      use: cssLoaders({
+        loader: 'stylus-loader', // 将 Stylus 文件编译为 CSS
+        options: {
+          stylusOptions: {
+            import: [path.join(__dirname, 'src/stylus-vars.styl')]
           }
         }
-      ]
+      })
     }]
   }
 }
